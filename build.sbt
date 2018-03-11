@@ -6,16 +6,10 @@ version := "1.0"
 Configuration.settings
 
 /** ********* PROD DEPENDENCIES *****************/
-libraryDependencies ++= Seq(
-  "com.github.nscala-time" %% "nscala-time" % "2.18.0",
-  "com.lihaoyi"            %% "pprint"      % "0.5.3"
-)
+libraryDependencies ++= Dependencies.production
 
 /** ********* TEST DEPENDENCIES *****************/
-libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "3.0.4" % Test,
-  "org.scalamock" %% "scalamock" % "4.0.0" % Test
-)
+libraryDependencies ++= Dependencies.test
 
 /** ********* COMMANDS ALIASES ******************/
 addCommandAlias("t", "test")
