@@ -12,7 +12,8 @@ final class Routes(container: EntryPointDependencyContainer) {
     get {
       path("status")(container.statusGetController.get())  ~
       path("users")(container.userGetController.get()) ~
-      path("videos")(container.videoGetController.get())
+      path("videos")(container.videoGetController.get()) ~
+      path("courses")(container.courseGetController.get())
     } ~
     post {
       path("videos") {
@@ -22,6 +23,15 @@ final class Routes(container: EntryPointDependencyContainer) {
             body("title").convertTo[String],
             body("duration_in_seconds").convertTo[Int].seconds,
             body("category").convertTo[String]
+          )
+        }
+      } ~
+      path("courses") {
+        jsonBody { body =>
+          container.coursePostController.post(
+            body("id").convertTo[String],
+            body("title").convertTo[String],
+            body("duration_in_seconds").convertTo[Int].seconds
           )
         }
       }
