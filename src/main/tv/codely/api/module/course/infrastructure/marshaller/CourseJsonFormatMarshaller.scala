@@ -26,7 +26,7 @@ object CourseJsonFormatMarshaller {
   }
 
   implicit object CourseTitleMarshaller extends JsonFormat[CourseTitle] {
-    def write(value: CourseTitle): JsValue = JsString(value.toString)
+    def write(value: CourseTitle): JsValue = JsString(value.value)
 
     def read(value: JsValue): CourseTitle = value match {
       case JsString(title) => CourseTitle(title)
