@@ -8,6 +8,6 @@ protected[user] trait UserUnitTestCase extends UnitTestCase {
 
   protected def shouldSearchAllUsers(users: Seq[User]): Unit =
     (repository.all _)
-    .expects()
-    .returning(users)
+      .expects()
+      .returning(users)
 }
