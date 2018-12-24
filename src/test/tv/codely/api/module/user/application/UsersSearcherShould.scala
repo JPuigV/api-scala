@@ -1,7 +1,7 @@
 package tv.codely.api.module.user.application
 
 import tv.codely.api.module.user.UserUnitTestCase
-import tv.codely.api.module.user.infrastructure.stub.UserStub
+import tv.codely.api.module.user.domain.UserStub
 
 final class UsersSearcherTest extends UserUnitTestCase {
   private val searcher = new UsersSearcher(repository)
@@ -14,7 +14,7 @@ final class UsersSearcherTest extends UserUnitTestCase {
 
       shouldSearchAllUsers(existingUsers)
 
-      searcher.all() should be (existingUsers)
+      searcher.all().futureValue should be (existingUsers)
     }
   }
 }

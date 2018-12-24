@@ -1,6 +1,4 @@
-package tv.codely.api.module.user.infrastructure.stub
-
-import tv.codely.api.module.user.domain.User
+package tv.codely.api.module.user.domain
 
 object UserStub {
   def apply(

@@ -1,6 +1,5 @@
-package tv.codely.api.module.user.infrastructure.stub
+package tv.codely.api.module.user.domain
 
-import tv.codely.api.module.user.domain.UserName
 import tv.codely.api.module.shared.infrastructure.stub.{IntStub, StringStub}
 
 object UserNameStub {

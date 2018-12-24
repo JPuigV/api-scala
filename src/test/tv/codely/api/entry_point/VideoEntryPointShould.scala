@@ -8,7 +8,7 @@ import tv.codely.api.module.video.infrastructure.stub.VideoStub
 import tv.codely.api.module.video.infrastructure.marshaller.VideoJsValueMarshaller
 
 final class VideoSpec extends AcceptanceSpec {
-  "save a video" in post(
+  "save a video" in posting(
     "/videos",
     """
       |{
@@ -22,7 +22,7 @@ final class VideoSpec extends AcceptanceSpec {
     status shouldBe StatusCodes.NoContent
   }
 
-  "return all the system videos" in get("/videos") {
+  "return all the system videos" in getting("/videos") {
     val expectedVideos = Seq(
       VideoStub(
         id = "a11098af-d352-4cce-8372-2b48b97e6942",

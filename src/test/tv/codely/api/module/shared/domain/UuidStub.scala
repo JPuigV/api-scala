@@ -1,4 +1,4 @@
-package tv.codely.api.module.shared.infrastructure.stub
+package tv.codely.api.module.shared.domain
 
 import java.util.UUID
 

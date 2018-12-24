@@ -1,8 +1,7 @@
-package tv.codely.api.module.user.infrastructure.stub
+package tv.codely.api.module.user.domain
 
 import java.util.UUID
 
-import tv.codely.api.module.user.domain.UserId
 import tv.codely.api.module.shared.infrastructure.stub.UuidStub
 
 object UserIdStub {
