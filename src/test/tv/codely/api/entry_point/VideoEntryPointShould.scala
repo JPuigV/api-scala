@@ -1,13 +1,18 @@
 package tv.codely.api.entry_point
 
-import scala.concurrent.duration._
-
-import spray.json._
+import doobie.implicits._
 import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
+import spray.json._
 import tv.codely.api.module.video.infrastructure.stub.VideoStub
 import tv.codely.api.module.video.infrastructure.marshaller.VideoJsValueMarshaller
 
-final class VideoSpec extends AcceptanceSpec {
+final class VideoEntryPointShould extends AcceptanceSpec {
+  private def cleanVideosTable() =
+    sql"TRUNCATE TABLE videos".update.run
+      .transact(doobieDbConnection.transactor)
+      .unsafeToFuture()
+      .futureValue
+
   "save a video" in posting(
     "/videos",
     """
@@ -22,18 +27,17 @@ final class VideoSpec extends AcceptanceSpec {
     status shouldBe StatusCodes.NoContent
   }
 
-  "return all the system videos" in getting("/videos") {
-    val expectedVideos = Seq(
-      VideoStub(
-        id = "a11098af-d352-4cce-8372-2b48b97e6942",
-        title = "🎥 Entrevista a SergiGP, de troll a developer!",
-        duration = 15.seconds,
-        category = "Interview"
-      )
-    )
+  "return all the videos" in getting("/videos") {
+    cleanVideosTable()
 
-    status shouldBe StatusCodes.OK
-    contentType shouldBe ContentTypes.`application/json`
-    entityAs[String].parseJson shouldBe VideoJsValueMarshaller.marshall(expectedVideos)
+    val videos = VideoStub.randomSeq
+
+    videos.foreach(v => videoDependencies.repository.save(v).futureValue)
+
+    getting("/videos") {
+      status shouldBe StatusCodes.OK
+      contentType shouldBe ContentTypes.`application/json`
+      entityAs[String].parseJson shouldBe VideoJsValueMarshaller.marshall(videos)
+    }
   }
 }

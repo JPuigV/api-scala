@@ -2,8 +2,8 @@ package tv.codely.api.module.course.infrastructure.marshaller
 
 import java.util.UUID
 
-import spray.json.DefaultJsonProtocol.jsonFormat3
 import spray.json.{DeserializationException, JsNumber, JsString, JsValue, JsonFormat, RootJsonFormat}
+import spray.json.DefaultJsonProtocol._
 import tv.codely.api.module.course.domain._
 
 object CourseJsonFormatMarshaller {
@@ -12,7 +12,7 @@ object CourseJsonFormatMarshaller {
 
     def read(value: JsValue): UUID = value match {
       case JsString(uuid) => UUID.fromString(uuid)
-      case _ => throw DeserializationException(s"Expected hexadecimal UUID string")
+      case _              => throw DeserializationException(s"Expected hexadecimal UUID string")
     }
   }
 
@@ -21,7 +21,7 @@ object CourseJsonFormatMarshaller {
 
     def read(value: JsValue): CourseId = value match {
       case JsString(id) => CourseId(id)
-      case _ => throw DeserializationException(s"Expected 1 string for CourseId")
+      case _            => throw DeserializationException(s"Expected 1 string for CourseId")
     }
   }
 
@@ -30,7 +30,7 @@ object CourseJsonFormatMarshaller {
 
     def read(value: JsValue): CourseTitle = value match {
       case JsString(title) => CourseTitle(title)
-      case _ => throw DeserializationException(s"Expected 1 string for CourseTitle")
+      case _               => throw DeserializationException(s"Expected 1 string for CourseTitle")
     }
   }
 
@@ -39,11 +39,14 @@ object CourseJsonFormatMarshaller {
 
     def read(value: JsValue): CourseDuration = value match {
       case JsNumber(seconds) => CourseDuration(seconds)
-      case _ => throw DeserializationException(s"Expected 1 string for CourseDuration")
+      case _                 => throw DeserializationException(s"Expected 1 string for CourseDuration")
     }
   }
 
-  implicit val videoFormat: RootJsonFormat[Course] = jsonFormat3(
-    Course.apply(_: CourseId, _: CourseTitle, _: CourseDuration)
+  implicit val videoFormat: RootJsonFormat[Course] = jsonFormat(
+    Course.apply(_: CourseId, _: CourseTitle, _: CourseDuration),
+    "id",
+    "title",
+    "duration_in_seconds"
   )
 }

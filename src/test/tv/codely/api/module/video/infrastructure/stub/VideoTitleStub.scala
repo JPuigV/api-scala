@@ -1,6 +1,6 @@
 package tv.codely.api.module.video.infrastructure.stub
 
-import tv.codely.api.module.shared.infrastructure.stub.{IntStub, StringStub}
+import tv.codely.api.module.shared.domain.{IntStub, StringStub}
 import tv.codely.api.module.video.domain.VideoTitle
 
 object VideoTitleStub {

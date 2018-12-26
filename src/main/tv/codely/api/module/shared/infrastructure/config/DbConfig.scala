@@ -1,5 +1,14 @@
 package tv.codely.api.module.shared.infrastructure.config
 
-class DbConfig {
+import com.typesafe.config.Config
 
+object DbConfig {
+  def apply(dbConfig: Config): DbConfig = DbConfig(
+    driver = dbConfig.getString("driver"),
+    url = dbConfig.getString("url"),
+    user = dbConfig.getString("user"),
+    password = dbConfig.getString("password")
+  )
 }
+
+final case class DbConfig(driver: String, url: String, user: String, password: String)

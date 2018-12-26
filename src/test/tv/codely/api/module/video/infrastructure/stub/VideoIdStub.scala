@@ -2,7 +2,7 @@ package tv.codely.api.module.video.infrastructure.stub
 
 import java.util.UUID
 
-import tv.codely.api.module.shared.infrastructure.stub.UuidStub
+import tv.codely.api.module.shared.domain.UuidStub
 import tv.codely.api.module.video.domain.VideoId
 
 object VideoIdStub {

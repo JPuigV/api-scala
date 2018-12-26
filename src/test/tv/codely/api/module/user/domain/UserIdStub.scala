@@ -2,7 +2,7 @@ package tv.codely.api.module.user.domain
 
 import java.util.UUID
 
-import tv.codely.api.module.shared.infrastructure.stub.UuidStub
+import tv.codely.api.module.shared.domain.UuidStub
 
 object UserIdStub {
   def apply(value: String): UserId = UserIdStub(UuidStub(value))

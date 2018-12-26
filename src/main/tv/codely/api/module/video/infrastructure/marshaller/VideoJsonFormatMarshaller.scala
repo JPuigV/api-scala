@@ -12,7 +12,7 @@ object VideoJsonFormatMarshaller {
 
     def read(value: JsValue): UUID = value match {
       case JsString(uuid) => UUID.fromString(uuid)
-      case _ => throw DeserializationException(s"Expected hexadecimal UUID string")
+      case _              => throw DeserializationException(s"Expected hexadecimal UUID string")
     }
   }
 
@@ -21,7 +21,7 @@ object VideoJsonFormatMarshaller {
 
     def read(value: JsValue): VideoId = value match {
       case JsString(id) => VideoId(id)
-      case _ => throw DeserializationException(s"Expected 1 string for VideoId")
+      case _            => throw DeserializationException(s"Expected 1 string for VideoId")
     }
   }
 
@@ -30,7 +30,7 @@ object VideoJsonFormatMarshaller {
 
     def read(value: JsValue): VideoTitle = value match {
       case JsString(title) => VideoTitle(title)
-      case _ => throw DeserializationException(s"Expected 1 string for VideoTitle")
+      case _               => throw DeserializationException(s"Expected 1 string for VideoTitle")
     }
   }
 
@@ -39,7 +39,7 @@ object VideoJsonFormatMarshaller {
 
     def read(value: JsValue): VideoDuration = value match {
       case JsNumber(seconds) => VideoDuration(seconds)
-      case _ => throw DeserializationException(s"Expected 1 string for VideoDuration")
+      case _                 => throw DeserializationException(s"Expected 1 string for VideoDuration")
     }
   }
 
@@ -48,11 +48,15 @@ object VideoJsonFormatMarshaller {
 
     def read(value: JsValue): VideoCategory = value match {
       case JsString(category) => VideoCategory(category)
-      case _ => throw DeserializationException(s"Expected 1 string for VideoCategory")
+      case _                  => throw DeserializationException(s"Expected 1 string for VideoCategory")
     }
   }
 
-  implicit val videoFormat: RootJsonFormat[Video] = jsonFormat4(
-    Video.apply(_: VideoId, _: VideoTitle, _: VideoDuration, _:VideoCategory)
+  implicit val videoFormat: RootJsonFormat[Video] = jsonFormat(
+    Video.apply(_: VideoId, _: VideoTitle, _: VideoDuration, _: VideoCategory),
+    "id",
+    "title",
+    "duration_in_seconds",
+    "category"
   )
 }

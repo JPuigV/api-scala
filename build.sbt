@@ -21,6 +21,12 @@ addCommandAlias("c", "compile")
 addCommandAlias("tc", "test:compile")
 
 addCommandAlias("f", "scalafmt") // Format all files according to ScalaFmt
-addCommandAlias("ft", "scalafmtTest") // Test if all files are formatted according to ScalaFmt
+addCommandAlias("fc", "scalafmtCheck")
+addCommandAlias("tf", "test:scalafmt") // Test if all files are formatted according to ScalaFmt
+addCommandAlias("tfc", "test:scalafmtCheck")
 
-addCommandAlias("prep", ";c;tc;ft") // All the needed tasks before running the test
+addCommandAlias("prep", ";c;tc;fc;tfc") // All the needed tasks before running the test
+
+TaskKey[Unit]("createDbTables") := (runMain in Compile)
+  .toTask(" tv.codely.api.entry_point.cli.DbTablesCreator")
+  .value

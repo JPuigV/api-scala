@@ -12,7 +12,7 @@ object UserJsonFormatMarshaller {
 
     def read(value: JsValue): UserName = value match {
       case JsString(name) => UserName(name)
-      case _ => throw DeserializationException("Expected 1 string for UserName")
+      case _              => throw DeserializationException("Expected 1 string for UserName")
     }
   }
 
@@ -21,7 +21,7 @@ object UserJsonFormatMarshaller {
 
     def read(value: JsValue): UUID = value match {
       case JsString(uuid) => UUID.fromString(uuid)
-      case _ => throw DeserializationException("Expected hexadecimal UUID string")
+      case _              => throw DeserializationException("Expected hexadecimal UUID string")
     }
   }
 
@@ -30,7 +30,7 @@ object UserJsonFormatMarshaller {
 
     def read(value: JsValue): UserId = value match {
       case JsString(id) => UserId(id)
-      case _ => throw DeserializationException("Expected 1 string for UserId")
+      case _            => throw DeserializationException("Expected 1 string for UserId")
     }
   }
 

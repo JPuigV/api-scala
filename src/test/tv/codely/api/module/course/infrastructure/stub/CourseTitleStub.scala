@@ -1,7 +1,7 @@
 package tv.codely.api.module.course.infrastructure.stub
 
 import tv.codely.api.module.course.domain.CourseTitle
-import tv.codely.api.module.shared.infrastructure.stub.{IntStub, StringStub}
+import tv.codely.api.module.shared.domain.{IntStub, StringStub}
 
 object CourseTitleStub {
   private val minimumChars = 5

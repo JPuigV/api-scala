@@ -1,11 +1,20 @@
 language: scala
 
+services:
+  - docker
+
 scala:
   - 2.12.4
 
 jdk:
   - oraclejdk8
 
+before_install:
+  - cp docker/.env.dist docker/.env
+  - cp docker/; docker-compose up -d
+  - sbt runMain tv.codely.api.entry_point.cli.DbTablesCreator
+
 script:
+  - docker --version
   ## This runs the template with the default parameters, and runs test within the templated app.
   - sbt -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M test

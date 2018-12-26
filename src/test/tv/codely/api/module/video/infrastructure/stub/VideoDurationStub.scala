@@ -1,6 +1,6 @@
 package tv.codely.api.module.video.infrastructure.stub
 
-import tv.codely.api.module.shared.infrastructure.stub.DurationStub
+import tv.codely.api.module.shared.domain.DurationStub
 import tv.codely.api.module.video.domain.VideoDuration
 
 object VideoDurationStub {

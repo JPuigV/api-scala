@@ -3,16 +3,14 @@ package tv.codely.api.module.course.application.create
 import tv.codely.api.module.course.CourseUnitTestCase
 import tv.codely.api.module.course.infrastructure.stub.CourseStub
 
-final class CourseCreatorTest extends CourseUnitTestCase {
+final class CourseCreatorShould extends CourseUnitTestCase {
   private val creator = new CourseCreator(repository)
 
-  "Courses Creator" should {
-    "save a course" in {
-      val course = CourseStub.random
+  "save a course" in {
+    val course = CourseStub.random
 
-      repositoryShouldSave(course)
+    repositoryShouldSave(course)
 
-      creator.create(course.id, course.title, course.duration) should be(())
-    }
+    creator.create(course.id, course.title, course.duration) should be(())
   }
 }

@@ -1,6 +1,6 @@
 package tv.codely.api.module.user.domain
 
-import tv.codely.api.module.shared.infrastructure.stub.{IntStub, StringStub}
+import tv.codely.api.module.shared.domain.{IntStub, StringStub}
 
 object UserNameStub {
   private val minimumChars = 1
